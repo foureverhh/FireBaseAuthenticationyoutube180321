@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "806055900709",
+    "firebase_url": "https://myjoggingapp180319.firebaseio.com",
+    "project_id": "myjoggingapp180319",
+    "storage_bucket": "myjoggingapp180319.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806055900709:android:be82fb915eccde46",
+        "android_client_info": {
+          "package_name": "com.nackademin.foureverhh.myjoggingapp180319"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806055900709-43cjhs4kpsnv444aham543cppunhnhti.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nackademin.foureverhh.myjoggingapp180319",
+            "certificate_hash": "515391513cf9d62040924b73082db3f7e25760dc"
+          }
+        },
+        {
+          "client_id": "806055900709-6q5jh4j0110fsn13i89o32eoslsae5nm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLWErCjD63thi4Ty1zgpkYcWTJKyNBXqY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806055900709-6q5jh4j0110fsn13i89o32eoslsae5nm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806055900709:android:2393d2e4f33ddd8e",
+        "android_client_info": {
+          "package_name": "com.nackademin.foureverhh.firebaseauthenticationyoutube180321"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806055900709-jn8ka0fvek15h7o4m8jb8ehii8r64s21.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nackademin.foureverhh.firebaseauthenticationyoutube180321",
+            "certificate_hash": "515391513cf9d62040924b73082db3f7e25760dc"
+          }
+        },
+        {
+          "client_id": "806055900709-6q5jh4j0110fsn13i89o32eoslsae5nm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLWErCjD63thi4Ty1zgpkYcWTJKyNBXqY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806055900709-6q5jh4j0110fsn13i89o32eoslsae5nm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
