@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Pattern;
@@ -72,10 +73,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Log.d("User","User done");
                     Toast.makeText(getApplicationContext(),"User Registered Successful",Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(getApplicationContext(),"Some errors occurred",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"Some errors occurred",Toast.LENGTH_SHORT).show();
+                    //To check whether the email address is already exist
+                    if(task.getException() instanceof FirebaseAuthUserCollisionException){
+                        Toast.makeText(getApplicationContext(),"You have registered",Toast.LENGTH_SHORT).show();
+
+                    }
                 }
             }
         });
