@@ -43,6 +43,8 @@ public class ProfieActivity extends AppCompatActivity implements View.OnClickLis
 
     FirebaseAuth mAuth;
 
+    TextView textViewVerified;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,7 @@ public class ProfieActivity extends AppCompatActivity implements View.OnClickLis
         btn_save = findViewById(R.id.buttonSave);
         progressBar = findViewById(R.id.progressbar);
         mAuth = FirebaseAuth.getInstance();
+        textViewVerified = findViewById(R.id.textVerified);
 
         imageView.setOnClickListener(this);
         btn_save.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +80,8 @@ public class ProfieActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void loadUserInformation(){
-        FirebaseUser user = mAuth.getCurrentUser();
+        //make it final so that on row 109 the same user can invoke sendEmailVerification()
+        final FirebaseUser user = mAuth.getCurrentUser();
         //If user exist
         if(user != null) {
             if (user.getPhotoUrl() != null) {
@@ -93,6 +97,24 @@ public class ProfieActivity extends AppCompatActivity implements View.OnClickLis
                 editText.setText(user.getDisplayName());
             }
 
+        }
+
+        //To check whether a user is verified
+        if(user.isEmailVerified()){  //isEmailVerified if user is verified,then return true
+            textViewVerified.setText("Email verified");
+        }else{
+            textViewVerified.setText("Email not verified(Click to verify)");
+            textViewVerified.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(ProfieActivity.this,"Verification email sent",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
         }
 
     }
