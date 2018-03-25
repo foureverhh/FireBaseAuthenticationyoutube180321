@@ -1,5 +1,6 @@
 package com.nackademin.foureverhh.firebaseauthenticationyoutube180321;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -73,7 +74,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(getApplicationContext(),"User Registered Successful",Toast.LENGTH_SHORT).show();
+                    //Kill the sign up activity and jump to profile activity
+                    finish();
+                    startActivity(new Intent(SignUpActivity.this,ProfieActivity.class));
+                    //Toast.makeText(getApplicationContext(),"User Registered Successful",Toast.LENGTH_SHORT).show();
                 }else {
                     //Toast.makeText(getApplicationContext(),"Some errors occurred",Toast.LENGTH_SHORT).show();
                     //To check whether the email address is already exist

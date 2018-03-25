@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -61,6 +62,39 @@ public class ProfieActivity extends AppCompatActivity implements View.OnClickLis
                 saveUserInformation();
             }
         });
+        //To load the information of users
+        loadUserInformation();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(mAuth.getCurrentUser() == null){
+            //If the user has not registrated,go back to the main activity
+            finish();
+            startActivity(new Intent(ProfieActivity.this,MainActivity.class));
+        }
+    }
+
+    private void loadUserInformation(){
+        FirebaseUser user = mAuth.getCurrentUser();
+        //If user exist
+        if(user != null) {
+            if (user.getPhotoUrl() != null) {
+               // String photoUri = user.getPhotoUrl().toString();
+                // Use glide to load the image to profile
+                Glide.with(this)
+                        .load(user.getPhotoUrl().toString())
+                        .into(imageView);
+
+            }
+            if (user.getDisplayName() != null) {
+                //String displayName = user.getDisplayName();
+                editText.setText(user.getDisplayName());
+            }
+
+        }
+
     }
 
     private void saveUserInformation(){
@@ -90,6 +124,19 @@ public class ProfieActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+
+
+    @Override
+    public void onClick(View v) {
+        showImageChooser();
+    }
+
+    public void showImageChooser(){
+        Intent intent = new Intent();
+        intent.setType("image/*"); //Means it is going to handle the type of image
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"Select Profile Image"),CHOOSE_IMAGE);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -111,20 +158,8 @@ public class ProfieActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        showImageChooser();
-    }
-
-    public void showImageChooser(){
-        Intent intent = new Intent();
-        intent.setType("image/*"); //Means it is going to handle the type of image
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select Profile Image"),CHOOSE_IMAGE);
-    }
-
     private void uploadImageToFirebaseStorage(){
-
+        //Set up a file path
         final StorageReference profileImageRef
                 = FirebaseStorage.getInstance().getReference("profile/"+System.currentTimeMillis()+".jpg");
 
@@ -136,6 +171,7 @@ public class ProfieActivity extends AppCompatActivity implements View.OnClickLis
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     progressBar.setVisibility(View.GONE);
+                    //uriProfileImage = taskSnapshot.getDownloadUrl();//Can upload picture to firebase as well
                     profileImageUrl = taskSnapshot.getDownloadUrl().toString();
                 }
             })

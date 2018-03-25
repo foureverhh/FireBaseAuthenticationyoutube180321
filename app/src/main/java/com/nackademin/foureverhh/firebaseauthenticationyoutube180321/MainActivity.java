@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    finish();//So that man can not go back to the previous activity
                     Intent profile = new Intent(MainActivity.this,ProfieActivity.class);
                     //To make the profile activity on top so that the user will not go back to login activity
                     profile.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -81,6 +82,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_login:
                 userLogin();
                 break;
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //If the user has already logged in
+        if(mAuth.getCurrentUser() != null){
+            //Kill the activity
+            finish();
+            //Jump to profile activity direct
+            startActivity(new Intent(MainActivity.this,ProfieActivity.class));
         }
     }
 }
