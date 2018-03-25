@@ -12,4 +12,5 @@
     <string name="enter_display_name">Enter display name</string>
     <string name="save">Save</string>
     <string name="verified">Verified</string>
+    <string name="log_out">Log out</string>
 </resources>

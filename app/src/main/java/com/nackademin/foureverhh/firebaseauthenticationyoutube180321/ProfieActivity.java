@@ -7,6 +7,10 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -57,6 +62,9 @@ public class ProfieActivity extends AppCompatActivity implements View.OnClickLis
         progressBar = findViewById(R.id.progressbar);
         mAuth = FirebaseAuth.getInstance();
         textViewVerified = findViewById(R.id.textVerified);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         imageView.setOnClickListener(this);
         btn_save.setOnClickListener(new View.OnClickListener() {
@@ -205,5 +213,24 @@ public class ProfieActivity extends AppCompatActivity implements View.OnClickLis
                 }
             });
         }
+    }
+    //To modify the toolbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuLogout:
+                FirebaseAuth.getInstance().signOut(); //To invoke the sign out
+                finish();
+                startActivity(new Intent(this,MainActivity.class));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
